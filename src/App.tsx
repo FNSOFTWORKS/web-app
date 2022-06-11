@@ -8,6 +8,8 @@ import store from './store';
 import Dashboard from './pages/DashboardPage';
 import Register from './pages/RegisterPage';
 
+
+
 function App() {
   return (
     <Suspense fallback="">

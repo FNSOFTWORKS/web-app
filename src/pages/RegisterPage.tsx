@@ -4,7 +4,6 @@ import {useForm, SubmitHandler} from "react-hook-form";
 import {useDispatch, useSelector} from "react-redux";
 
 import {UPDATE_USER, userState} from "../store"
-import { type } from "os";
 
 type Inputs = {
     name: string,
