@@ -1,4 +1,5 @@
 import React, { Suspense } from 'react';
+import "bootstrap/dist/css/bootstrap.min.css"
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import * as ROUTES from "../src/contants/routes";
 import { Provider  } from 'react-redux';
@@ -6,9 +7,7 @@ import { Provider  } from 'react-redux';
 import store from './store';
 
 import Dashboard from './pages/DashboardPage';
-import Register from './pages/RegisterPage';
-
-
+import Register from './pages/register';
 
 function App() {
   return (
