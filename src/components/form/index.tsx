@@ -7,23 +7,42 @@ import usePersistedState from "../../utils/usePersistedState";
 
 import {DefaultAppState} from "../../store/default.appState";
 import blankAppState from "../../store/blank.appState"
+import {useNavigate} from "react-router-dom";
 
-type Inputs = {
-    name: string,
+enum Type {
+    login,
+    register,
+    mail
+}
+
+type RegisterInputs = {
+    name?: string,
     email: string,
     password: string,
-    password_confirmation: string
+    password_confirmation?: string
 };
 
-const Form = () => {
+type LoginInputs = {
+    email: string,
+    password: string,
+};
 
-    const { register, handleSubmit, watch, formState: { errors } } = useForm<Inputs>();
+interface Props {
+    url:string,
+    type:Type
+}
+
+const Form:React.FC<Props> = ({url,type}) => {
+    const navigate = useNavigate();
+    const goToLoginPage = () => navigate('/');
+
+    const { register, handleSubmit, watch, formState: { errors } } = useForm<RegisterInputs>();
+
 
     const [appState, setAppState] = usePersistedState<DefaultAppState>('appState', blankAppState);
 
-    const onSubmit: SubmitHandler<Inputs> = (data) => {
-        console.log(data);
-        axios.post('http://localhost:8000/api/auth/register', {...data})
+    const onSubmitRegister: SubmitHandler<RegisterInputs> = (data) => {
+        axios.post(url, {...data})
             .then((res) => {
                 if(res.data.success){
                     const userData = {
@@ -38,11 +57,11 @@ const Form = () => {
                     };
 
                     setAppState(appState);
-
-                    alert('Kayıt Tamamlandı');
+                    goToLoginPage();
+                    //alert('Kayıt Tamamlandı');
                 }
                 else {
-                    alert('Giriş Yapamadınız');
+                    //alert('Giriş Yapamadınız');
                 }
             })
             .catch(error => {
@@ -53,16 +72,30 @@ const Form = () => {
             });
     }
 
-    return (
-        <form onSubmit={handleSubmit(onSubmit)}>
-            <input type="text" defaultValue="test" {...register("name")} />
-            <input type="email" {...register("email", { required: true })} />
-            <input type="password" {...register("password", { required: true })} />
-            <input type="password" {...register("password_confirmation", { required: true })} />
 
-            {/* errors will return when field validation fails  */}
-            <button className="btn btn-primary btn-block px-4" type="submit">Register</button>
-        </form>
+    return (
+        <div>
+            {type == 0 ?
+                <form onSubmit={handleSubmit(onSubmitRegister)}>
+                    <input type="text" defaultValue="test" {...register("name")} />
+                    <input type="email" {...register("email", { required: true })} />
+                    <input type="password" {...register("password", { required: true })} />
+                    <input type="password" {...register("password_confirmation", { required: true })} />
+                    <button className="btn btn-primary btn-block px-4" type="submit">
+                        Register
+                    </button>
+                </form>
+                :
+                <form onSubmit={handleSubmit(onSubmitRegister)}>
+                    <input type="email" {...register("email", { required: true })} />
+                    <input type="password" {...register("password", { required: true })} />
+                    <button className="btn btn-primary btn-block px-4" type="submit">
+                        Login
+                    </button>
+                </form>
+            }
+
+        </div>
     )
 }
 

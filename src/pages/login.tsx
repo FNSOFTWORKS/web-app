@@ -1,10 +1,11 @@
 import React from "react";
 //Styles
-import {Container} from "./styled";
+import {Container} from "../styled/register.styled";
 //Utils
-import Form from "../../components/form/index";
+import Form from "../components/form";
 
-const Register = () => {
+const Login = () => {
+
     return (
         <Container>
             <div className="row">
@@ -14,7 +15,7 @@ const Register = () => {
                             <div className="card-group">
                                 <div className="card">
                                     <div className="card-body">
-                                        <Form/>
+                                        <Form url={'http://localhost:8000/api/auth/login'} type={1}/>
                                     </div>
                                 </div>
                                 <div className="card">
@@ -29,8 +30,8 @@ const Register = () => {
                     </div>
                 </div>
             </div>
-      </Container>
+        </Container>
     )
 }
 
-export default Register;
+export default Login;

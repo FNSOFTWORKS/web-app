@@ -1,28 +1,10 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import "bootstrap/dist/css/bootstrap.min.css"
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import * as ROUTES from "../src/contants/routes";
-import { Provider  } from 'react-redux';
-
-import store from './store';
-
-import Dashboard from './pages/DashboardPage';
-import Register from './pages/register';
+import Router from "./Router"
 
 function App() {
   return (
-    <Suspense fallback="">
-      <Router>
-      <Provider store={store}>
-        <>
-        <Switch>
-          <Route exact path={ROUTES.HOME} component={Dashboard}/>
-          <Route exact path={ROUTES.REGISTER} component={Register}/>
-        </Switch>
-        </>
-      </Provider>
-      </Router>
-    </Suspense>
+      <Router/>
   );
 }
 
