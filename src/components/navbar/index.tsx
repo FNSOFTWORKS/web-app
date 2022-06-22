@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
-import {Container} from "./styled";
-import { ThemeContext } from 'styled-components';
+import {Header} from "./styled";
+import Button from "../button";
 
 interface Props {
     swapTheme(): void;
@@ -9,15 +9,15 @@ interface Props {
 const Navbar:React.FC<Props> = ({swapTheme}) => {
 
     return (
-        <Container>
-            <div>
-                <button
-                    onClick={swapTheme}
-                >
-
-                </button>
+        <Header>
+            <div className="container-fluid">
+                <div className="d-flex">
+                    <div className="d-flex order-lg-2 m-lg-auto">
+                        <Button className="fa fa-lightbulb-o" onClick={swapTheme} type={0}></Button>
+                    </div>
+                </div>
             </div>
-        </Container>
+        </Header>
     )
 }
 

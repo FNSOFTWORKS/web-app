@@ -7,9 +7,12 @@ import light from "../styled/theme/light";
 import dark from "../styled/theme/dark";
 
 import GlobalStyle from "../styled/global.styled"
+import Sidebar from "../components/sidebar";
 
-
-const Dashboard = () => {
+interface Props {
+    children?: JSX.Element,
+}
+const Dashboard:React.FC<Props> = ({children}) => {
     const [theme, setTheme] = usePersistedState<DefaultTheme>('theme', light);
 
     const swapTheme = () => {
@@ -18,9 +21,11 @@ const Dashboard = () => {
 
     return (
         <ThemeProvider theme={theme}>
-            <div className="App">
+            <div className="container-fluid">
                 <GlobalStyle/>
+                <Sidebar/>
                 <Navbar swapTheme={swapTheme}/>
+                {children}
             </div>
         </ThemeProvider>
     )

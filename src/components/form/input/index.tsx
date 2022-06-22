@@ -4,8 +4,8 @@ interface Props {
     className?:string,
     type:string,
     placeholder:string,
-    name:string
-    required:boolean
+    name:string,
+    required:boolean,
 }
 
 const Input:React.FC<Props> = (
@@ -17,11 +17,13 @@ const Input:React.FC<Props> = (
         required}) => {
     return (
         <input
-            className={className}
+            autoComplete="off"
             type={type}
+            className={className}
             placeholder={placeholder}
             name={name}
             required={required}
+
         />
     )
 }

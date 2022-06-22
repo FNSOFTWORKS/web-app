@@ -1,11 +1,20 @@
-import React from "react";
+import React, {useEffect} from "react";
 //Styles
 import {Container} from "../styled/register.styled";
 //Utils
 import Form from "../components/form";
 
-const Login = () => {
+import usePersistedState from "../utils/usePersistedState";
+import {DefaultAppState} from "../store/default.appState";
+import blankAppState from "../store/blank.appState";
 
+const Login = () => {
+    const [appState] = usePersistedState<DefaultAppState>('appState', blankAppState);
+    useEffect(() => {
+        if (appState.user.access_token){
+            window.location.href = "/";
+        }
+    })
     return (
         <Container>
             <div className="row">
