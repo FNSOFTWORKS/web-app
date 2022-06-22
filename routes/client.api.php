@@ -21,8 +21,8 @@ Route::group([
 });
 
 Route::group([
-    'middleware' => ['auth:api']
-], function(){
+    'middleware'=>['auth:client-api','scopes:client']
+],function(){
     Route::post('/authenticate',[\App\Http\Controllers\API\v1\AuthController::class,'authenticate']);
     Route::resource('language',\App\Http\Controllers\API\v1\Settings\Languages\indexController::class);
 });
