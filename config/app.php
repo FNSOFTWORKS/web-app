@@ -1,4 +1,33 @@
 <?php
+/*
+ * Status
+ * */
+define('ENABLE',0);
+define('DIABLE',1);
+define('DEFAULT_LANGUAGE',1);
+define('DEFAULT_LANGUAGE_CODE','tr');
+
+/*
+ * Chapters
+ */
+
+define('BLOG_LANGUAGE',0);
+
+/*
+ * Chapter Subs
+ */
+
+define('TITLE_LANGUGAGE',0);
+define('DESCRIPTION_LANGUAGE',1);
+define('URL_LANGUAGE',2);
+define('IMAGE_LANGUAGE',3);
+define('NAME_LANGUAGE',4);
+define('SLUG_LANGUAGE',5);
+define('HOME_DESC_LANGUAGE',6);
+define('TEXT_LANGUAGE',7);
+define('KEYWORDS_LANGUAGE',8);
+define('RESOURCE_LANGUAGE',9);
+define('ANNOUNCEMENTS_LANGUAGE',10);
 
 use Illuminate\Support\Facades\Facade;
 

@@ -27,6 +27,7 @@ class LoginController extends Controller
         $user = $request->user();
         $tokenResult = $user->createToken('Personal Access');
         $token = $tokenResult->token;
+
         if($request->remember_me){
             $token->expires_at = Carbon::now()->addWeeks(1);
         }

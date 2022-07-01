@@ -5,7 +5,6 @@ namespace App\Http\Controllers\API\v1\Settings\Languages;
 use App\Http\Controllers\Controller;
 use App\Models\Languages;
 use Illuminate\Http\Request;
-use function Psy\debug;
 
 class indexController extends Controller
 {
@@ -17,8 +16,13 @@ class indexController extends Controller
     public function index()
     {
         $user = request()->user();
+        $data = Languages::all();
 
-        return response()->json(['success'=>true,'user'=>$user]);
+        return response()->json([
+            'success'=>true,
+            'user'=>$user,
+            'data'=>$data
+        ]);
     }
 
     /**
@@ -34,12 +38,6 @@ class indexController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $user = request()->user();

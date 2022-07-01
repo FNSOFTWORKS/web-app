@@ -21,10 +21,11 @@ Route::group([
 });
 
 Route::group([
-    'middleware'=>['auth:client-api','scopes:client']
+    'middleware'=>['auth:client-api']
 ],function(){
     Route::post('/authenticate',[\App\Http\Controllers\API\v1\AuthController::class,'authenticate']);
     Route::resource('language',\App\Http\Controllers\API\v1\Settings\Languages\indexController::class);
+    Route::resource('post', \App\Http\Controllers\API\v1\Contents\Blog\indexController::class);
 });
 
 
