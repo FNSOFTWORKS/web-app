@@ -34,12 +34,23 @@ class indexController extends Controller
     {
         $user = request()->user();
         $all = $request->all();
-        $languages = Languages::all();
 
-        foreach ($languages as $k => $v){
-            LanguageContent::InsertAndUpdate($all['name_'.$languages[$k]['id']], $all['languageId_'.$languages[$k]['id']], BLOG_LANGUAGE, NAME_LANGUAGE, 111);
-            LanguageContent::InsertAndUpdate($all['text_'.$languages[$k]['id']], $all['languageId_'.$languages[$k]['id']], BLOG_LANGUAGE, TEXT_LANGUAGE, 111);
+
+        $array = [
+            'isShow'=>$all['isShow'],
+            'date'=>$all['date'],
+            'categoryId'=>$all['categoryId']
+        ];
+        $create = Blogs::create($array);
+
+        if ($create){
+            $languages = Languages::all();
+            foreach ($languages as $k => $v){
+                LanguageContent::InsertAndUpdate($all['name_'.$languages[$k]['id']], $all['languageId_'.$languages[$k]['id']], BLOG_LANGUAGE, NAME_LANGUAGE, $create['id']);
+                LanguageContent::InsertAndUpdate($all['text_'.$languages[$k]['id']], $all['languageId_'.$languages[$k]['id']], BLOG_LANGUAGE, TEXT_LANGUAGE, $create['id']);
+            }
         }
+
         //LanguageContent::InsertAndUpdate($all['name_'.$languages[]['id']], $all['languageId_'.$languages[0]['id']], BLOG_LANGUAGE, NAME_LANGUAGE, 111);
         /*$array = [
             'isShow'=>$all['isShow'],
